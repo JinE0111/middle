@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="order">
+ 
+ 	<!-- 장바구니 리스트 조회 -->
+ 	<select id="orderList" parameterType="String" resultType="kr.or.ddit.sfc.vo.OrderVO">
+ 		select d.buy_date, b.buy_no, p.pro_name, ds.deli_stat, b.buy_cost, p.pro_code, d.buy_qty
+			from buy b, buy_detail d, product p, deli_status ds
+			where
+			b.BUY_NO = d.BUY_NO
+			and d.PRO_CODE = p.PRO_CODE
+			and ds.deli_stat_code = b.deli_stat_code
+			and b.MEM_ID = #{memId}
+			and p.PRO_DEL_YN = 'N'
+			order by d.buy_date desc
+ 	</select>
+
+ 
+ </mapper>
+
+ 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="search">
+ 
+ 	<select id="searchName" parameterType="String" resultType="kr.or.ddit.sfc.vo.ProductVO">
+		select 
+		p.pro_code,
+		p.pro_name,
+		p.pro_unit, 
+		p.pro_sell_cost, 
+		(e.ev_discount * p.pro_sell_cost) discountCost,
+		e.ev_code,
+		p.pro_rep_img
+		from product p, event e 
+		where 
+		p.ev_code = e.ev_code
+		and pro_name like '%'|| #{search} ||'%' and pro_del_yn = 'N'
+ 	</select>
+ 
+ </mapper>
+ 

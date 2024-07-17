@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="cart">
+ 
+ 	<!-- 장바구니 리스트 조회 -->
+ 	<select id="cartList" parameterType="String" resultType="kr.or.ddit.sfc.vo.CartVO">
+ 		SELECT 
+		    c.mem_id, 
+		    c.cart_no, 
+		    p.pro_code, 
+		    p.pro_name, 
+		    p.pro_rep_img,
+            p.pro_sell_cost,
+		    (p.pro_sell_cost * e.ev_discount) discountCost, 
+		    c.cart_qty
+		FROM 
+		    cart c, 
+		    product p, 
+		    event e
+		WHERE 
+            e.ev_code = p.ev_code
+		    AND c.pro_code = p.pro_code 
+		    AND c.mem_id = #{memId}
+		    AND p.pro_del_yn = 'N'
+ 	</select>
+ 	
+ 	<!-- 장바구니 품목 삭제 -->
+ 	<delete id="cartDelete" parameterType="String">
+	    delete from cart 
+	    where pro_code = #{proCode}
+	    and mem_id = #{memId}
+	</delete>
+ 	
+ 	<update id="cartUpdate" parameterType="map">
+ 		update cart set cart_qty = #{value} where pro_code = #{proCode} and mem_id = #{memId}
+ 	
+ 	</update>
+ 	
+ 	<!-- 장바구니 추가  -->
+ 	<update id="cartInsert" parameterType="map">
+ 		insert into cart (cart_no, mem_id, pro_code, cart_qty)
+		values ( (select 'C'||lpad(substr(max(cart_no),2)+1, 4, '0') cart_no from cart), #{memId}, #{proCode} , #{cartQty})
+ 	</update>
+ </mapper>
+
+ 

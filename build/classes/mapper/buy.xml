@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="buy">
+	<select id="buyName" parameterType="String" resultType="kr.or.ddit.sfc.vo.CartVO">
+		<!-- select c.pro_code, c.cart_qty, p.pro_sell_cost, p.pro_name, p.pro_rep_img
+		from cart c, product p
+		where c.pro_code = p.pro_code
+		and mem_id = #{memId} -->
+		SELECT 
+		    c.mem_id, 
+		    c.cart_no, 
+		    p.pro_code, 
+		    p.pro_name, 
+		    p.pro_rep_img,
+            p.pro_sell_cost,
+		    (p.pro_sell_cost * e.ev_discount) discountCost, 
+		    c.cart_qty
+		FROM 
+		    cart c, 
+		    product p, 
+		    event e
+		WHERE 
+            e.ev_code = p.ev_code
+		    AND c.pro_code = p.pro_code 
+		    AND c.mem_id = #{memId}
+		    AND p.pro_del_yn = 'N'
+	</select>
+	
+	<insert id="buyAdd" parameterType="kr.or.ddit.sfc.vo.BuyVO">
+		insert into buy(buy_no, buy_way, mem_id, deli_stat_code, deli_code, buy_cost)
+		values ( (select 'B'||lpad((count(*)+1), 4, '0') buy_no from buy), #{payVal}, #{userId}, 'DS001', #{addCode}, #{buyCost})
+	</insert>
+	
+	<select id="buyProductList" parameterType="String" resultType="kr.or.ddit.sfc.vo.ProductVO">
+		select p.pro_code, p.pro_name, p.pro_sell_cost, p.pro_img, c.cart_qty
+		from cart c, product p
+		where c.pro_code = p.pro_code
+		and c.mem_id = #{memId}
+	</select>
+	
+	<insert id="buyDetailInsert" parameterType="kr.or.ddit.sfc.vo.BuyDetailVO">
+		insert into buy_detail(buy_no, pro_code, buy_qty, rev_yn, buy_date)
+		values ( (select 'B'||lpad((count(*)), 4, '0') BUY_NO from buy), #{proCode}, #{buyQty}, 'N', SYSDATE)
+	</insert>
+	
+	<delete id="buyDelete" parameterType="String">
+		delete from cart
+		where mem_id = #{memId}
+	</delete>
+	
+	<resultMap type="kr.or.ddit.sfc.vo.ProductVO" id="memMap">
+		<result column="pro_code" property="proCode" />
+		<result column="pro_name" property="proName" />
+		<result column="pro_sell_cost" property="proSellCost" />
+		<result column="pro_in_date" property="proInDate" />
+		<result column="pro_stock" property="proStock" />
+		<result column="pro_del_yn" property="proDelYn" />
+		<result column="pro_con" property="proCon" />
+		<result column="pro_unit" property="proUnit" />
+		<result column="pro_rep_img" property="proRepImg" />
+		<result column="pro_img" property="proImg" />
+		<result column="discountCost" property="discountCost" />
+	</resultMap>
+	
+	<select id="buyDirect" parameterType="Map" resultType="kr.or.ddit.sfc.vo.ProductVO">
+		select p.*, (p.pro_sell_cost * e.ev_discount)discountCost, (p.pro_sell_cost * e.ev_discount* #{proQty}) ttCost
+		from product p, event e
+		where p.ev_code = e.ev_code
+		and p.pro_code = #{proCode}
+	</select>
+</mapper>

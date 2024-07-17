@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="addrAdd">
+	
+	
+	<select id="selectAddrAdd" resultType="kr.or.ddit.sfc.vo.AddrAddVO">
+	
+	select  DISTINCT 
+    DELI_CODE as deliCode
+    ,DELI_POST_NO as deliPostNo
+    ,DELI_ADDR as deliAddr
+    ,DELI_ADDR_D as deliAddrD
+    ,DELI_TEL as memTel
+    ,DELI_NAME as memName
+    ,DELI_REQ as deliReq
+    ,DELI_DEL_YN as deliDelYn
+    from delivery
+    where 
+    DELI_ID = #{memId}
+    and DELI_DEL_YN = 'N'
+	</select>
+	
+	<update id="delectAddrAdd" parameterType = "kr.or.ddit.sfc.vo.AddrAddVO">
+	UPDATE delivery 
+	SET DELI_DEL_YN= 'Y' 
+	WHERE
+	DELI_CODE = #{deliCode}
+	</update>
+	
+ <insert id="insertAddrAdd"   parameterType = "kr.or.ddit.sfc.vo.AddrAddVO">
+	INSERT INTO delivery
+	VALUES (
+<!--     (SELECT 'D'||LPAD((COUNT(*)+1), 4, '0') FROM delivery), -->
+      (select   'D'||LPAD(max(TO_NUMBER(substr(DELI_CODE,2)))+1,4,'0')FROM delivery),
+    #{deliPostNo},
+    #{deliAddr},
+    #{deliAddrD},
+    #{memTel},
+    #{memName},
+    #{deliReq},
+    'N',
+    #{deliId}
+	)
+	</insert>
+	
+</mapper>

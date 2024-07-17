@@ -1,0 +1,110 @@
+body, div, ul, li, a, p, img{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    font-family: 'Noto Sans KR';
+}
+#img_wrap img{
+    width: 100%;
+}
+#best_push, #best_review{
+    width: 1076px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+#best_push ul{
+    width: 100%;
+   	display: flex;
+   	justify-content: space-between;
+}
+#best_push li{
+    margin: 0 20px;
+    display: inline-block;
+}
+.bst_info{
+    width: 100%;
+    text-align: left;
+}
+#best_push ul li img{
+    width: 100%;
+}
+#best_push ul li a{
+    text-decoration: none;
+}
+.bst_name{
+    font-size: 0.9em;
+    color: black;
+    font-weight: 600;
+
+}
+.bst_sp{
+    font-size: 0.8em;
+    color: gray;
+}
+.bst_price{
+    font-size: 0.9em;
+    color: black;
+    font-weight: 500;
+}
+/* 베스트추천 리스트 */
+#best_review{
+    background-color: rgb(223, 239, 255);
+    
+}
+#best_review h2{
+    padding-top: 30px;
+}
+#best_review ul{
+    width: 100%;
+    padding-bottom: 30px;
+}
+#best_review li{
+    width: calc(90%/4);
+    margin: 0 10px;
+    display: inline-block;
+    background-color: white;
+}
+.rev_txt{
+    width: 100%;
+    text-align: left;
+    margin: 0;
+}
+#best_review ul li img{
+    width: 100%;
+}
+#best_review ul li a{
+    text-decoration: none;
+}
+.bst_name{
+    font-size: 0.9em;
+    color: black;
+    font-weight: 600;
+
+}
+.rev_con{
+    font-size: 0.8em;
+    font-weight: 600;
+    color: gray;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+.rev_star{
+    font-size: 0.6em;
+    text-align: right;
+    padding-right: 10px;
+    font-weight: 500;
+}
+.rev_data{
+    font-size: 0.6em;
+    padding: 10px;
+    color: #9D9D9D;
+}
+.rev_id{
+    padding-right: 10px;
+}
+.rev_date{
+    padding-left:  10px;
+    border-left: #9D9D9D solid 1px;
+}

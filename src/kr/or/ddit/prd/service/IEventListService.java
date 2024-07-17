@@ -1,0 +1,14 @@
+package kr.or.ddit.prd.service;
+
+import java.util.List;
+
+import kr.or.ddit.sfc.vo.ProductVO;
+
+public interface IEventListService {
+	/**
+	 * 이벤트의 해당품목을 가져오는 메서드
+	 * @param param
+	 * @return
+	 */
+	public List<ProductVO> eventList(String param);
+}

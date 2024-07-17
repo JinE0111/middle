@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jjim_member">
+	
+	
+	<select id="selectAllJjim" resultType="kr.or.ddit.sfc.vo.JjimVo">
+    select 
+    a.PRO_NAME as proName
+    ,a.PRO_SELL_COST as proSellCost
+    ,e.EV_DISCOUNT as evDiscount
+    ,e.EV_CODE as evCode
+    ,(e.EV_DISCOUNT*a.PRO_SELL_COST) as evAvg
+    ,C.CG_NAME as cgName
+    ,b.MEM_ID as memId
+    ,b.PRO_CODE as proCode
+    ,a.PRO_REP_IMG as proRepImg
+	from 
+    product a, jjim b ,category c, event e
+    where 
+    1=1
+    and a.PRO_CODE = b.pro_code
+    and a.CG_CODE=C.CG_CODE
+    and e.EV_CODE = a.EV_CODE
+    and b.MEM_ID = #{memId}
+	</select>
+	
+	<select id="delectJjim" resultType="kr.or.ddit.sfc.vo.JjimVo">
+	delete from JJIM
+	where 
+	1=1
+	and MEM_ID = #{memId}
+	and PRO_CODE = #{proCode}
+	</select>
+	
+	<select id="insertJjim" resultType="kr.or.ddit.sfc.vo.JjimVo">
+	INSERT INTO JJIM (MEM_ID, PRO_CODE) 
+	VALUES (#{memId}, #{proCode})
+	</select>
+	
+</mapper>

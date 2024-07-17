@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="main">
+ 
+ 	<resultMap type="kr.or.ddit.sfc.vo.ProductVO" id="memMap">
+		<result column="pro_code" property="proCode" />
+		<result column="pro_name" property="proName" />
+		<result column="pro_sell_cost" property="proSellCost" />
+		<result column="pro_in_date" property="proInDate" />
+		<result column="pro_stock" property="proStock" />
+		<result column="pro_del_yn" property="proDelYn" />
+		<result column="pro_con" property="proCon" />
+		<result column="pro_unit" property="proUnit" />
+		<result column="pro_rep_img" property="proRepImg" />
+		<result column="pro_img" property="proImg" />
+		<result column="discountCost" property="discountCost" />
+	</resultMap>
+	
+	<select id="bestSeller" parameterType="String" resultType="kr.or.ddit.sfc.vo.ProductVO">
+      select rownum, c.* from 
+		(
+		    select a.*, b.sell_cnt
+		    from product a, (
+		              select pro_code, count(pro_code)sell_cnt
+		              from buy_detail
+		              group by pro_code
+		              order by sell_cnt desc
+		              ) b
+		    where a.pro_code = b.pro_code
+		    order by b.sell_cnt desc
+		)c
+		<![CDATA[
+		where rownum < 5
+		]]>
+    </select>
+
+ </mapper>
+ 

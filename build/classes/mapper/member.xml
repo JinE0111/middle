@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="member">
+ 
+ 	<select id="memUpdate" parameterType="kr.or.ddit.sfc.vo.MemberVO">
+ 		update member 
+		set mem_pw = #{memPw},
+		mem_name = #{memName},
+		mem_tel = #{memTel},
+		mem_email = #{memEmail},
+		mem_post_no = #{memPostNo},
+		mem_addr = #{memAddr},
+		mem_addr_d = #{memAddrD}
+		where mem_id = #{memId}
+ 	</select>
+ 	
+ 	<update id="memDelete" parameterType="kr.or.ddit.sfc.vo.MemberVO">
+	 	UPDATE member
+		SET MEM_DEL_YN ='Y'
+		WHERE MEM_ID = #{memId} and mem_del_yn = 'N'
+ 	</update>
+ 
+ </mapper>
+ 

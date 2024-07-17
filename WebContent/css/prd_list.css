@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+#list_container{
+    width: 100%;
+}
+#path_wrap{
+	width: 1076px;
+    margin: 10px auto;
+}
+#prd_list_wrap{
+    width: 1076px;
+    margin: 10px auto;
+}
+#path_wrap li{
+    display: inline-block;
+    list-style:none;
+    text-align: center;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+#path_wrap_ul li a{
+    background-color: rgba(0,0,0,0.5);
+    display: block;
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+}
+.prd_array{
+    border-top: 2px solid #004393;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px;
+}
+.prd_array ul li{
+    display: inline-block;
+}
+.prd_array ul li.array_active a{
+    color: #004393;
+}
+.prd_array ul li a{
+    text-decoration: none;
+    color: #666666;
+    font-size: 14px;
+    padding: 0 10px;
+}
+/* 상품리스트 */
+#prd_list ul{
+    width: 100%;
+	display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    text-align: center;
+}
+#prd_list li{
+    width: calc(90%/4);
+    margin: 20px 13px;
+    display: inline-block;
+    /* padding: 10px */
+}
+.prd_info{
+    width: 100%;
+    text-align: left;
+}
+#prd_list ul li img{
+    width: 100%;
+}
+#prd_list ul li a{
+    text-decoration: none;
+}
+.prd_name{
+    font-size: 0.9em;
+    color: black;
+    font-weight: 600;
+
+}
+.prd_sp{
+    font-size: 0.8em;
+    color: gray;
+}
+.prd_price{
+    font-size: 0.9em;
+    color: black;
+    font-weight: 500;
+}
+#prd_list_wrap .prd_page{
+    margin-top: 30px;
+    border-top: 1px solid #d9d9d9;
+}
+/* .prd_page .pagination .active a{
+    background-color: #004393;
+    color: white;
+}
+.prd_page{
+    color:#333333;
+} */
+
+
+/* 페이징 */
+.prd_page ul{
+	display: inline-block;
+}
+.prd_page ul li{
+    list-style: none;
+    display: inline-block;
+    margin-top: 10px;
+    padding:3px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: .5s
+}
+.prd_page ul li:hover{
+    color: white;
+    background-color: #b8d2f1;
+    border-radius: 10%;
+}
+.prd_page ul .prd_active_page{
+    background-color:#004393;
+    border-radius: 10%;
+}
+.prd_page ul .prd_active_page a{
+    color: white;
+    
+}
+.prd_page ul li a{
+    color:#666666
+}
+.none_data{
+	text-align: center;
+	height: 100px;
+    line-height: 120px;
+}

@@ -1,0 +1,288 @@
+
+#path_wrap, #detail_container{
+    width: 1073px;
+    margin: 10px auto;
+}
+.cursor{
+    cursor: pointer;
+}
+.detail_top{
+    padding-bottom: 56px;
+    border-bottom: 1px solid #999;
+}
+.detail_top .detail_top_txt_wrap ul li dl dd {
+/*     font-size: 16px; */
+/*     font-weight: 500; */
+    letter-spacing: -1px;
+}
+.detail_top_img_wrap{
+    width: 580px;
+    display: inline-block;
+    margin-right: 20px;
+}
+.detail_top_img_wrap img{
+    max-width: 100%;
+}
+.detail_top_txt_wrap{
+    display: inline-block;
+    width: 456px;
+    border-top: 2px solid #004393;
+    padding: 5px 0px;
+}
+.detail_top_txt_wrap ul{
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+.d_prd_name {
+    height: 31px;
+    font-weight: 600;
+    padding: 20px 0px;
+    
+} 
+.d_prd_info dt{
+    display: inline-block;
+    width: 100px;
+    
+}
+.d_prd_info dd{
+    display: inline-block;
+    padding: 0px 0px 0px 100px;
+}
+.d_prd_sell_cost{
+    height: 90px;
+}
+.d_ev_before_price{
+	text-decoration: line-through;
+}
+.d_ev_after_price{
+	font-weight: 600;
+}
+.d_prd_info_bottom li{
+    margin-top: 10px;
+}
+.d_prd_info_bottom .d_prd_deli_cost .d_prd_info span{
+    font-size: 14px;
+    padding: 5px;
+    color: #999999;
+}
+.detail_top_txt_wrap .d_prd_add{
+    background-color: #f8fcfe;
+    border-bottom: 2px solid #004393;
+    display: flex;
+    justify-content: right;
+    padding: 10px 20px;
+}
+ .d_prd_amount{
+    display: inline-block;
+    text-align: center;
+    margin:0px;
+    width: 120px;
+}
+.d_prd_amount_box > .d_prd_amount {
+    display: inline-block;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 17px;
+}
+
+.d_prd_amount_box > p{
+	display: inline-block;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 17px;
+}
+.d_prd_amount_box > input{
+	display: inline-block;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 17px;
+}
+
+.d_prd_amount{
+    width: 80px;
+    border: 1px solid #999;
+    background-color: #fff;
+    margin-right: 10px;
+}
+.d_prd_qty_del {
+    border:0;
+    background-color: #fff;
+    width: 15px;
+}
+#d_prd_qty{
+    width: 25px;
+    border: 0;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    text-align: center;
+    line-height: 21px;
+}
+.d_prd_tt_price{
+    padding: 8px 20px 0px 20px;
+    height: 50px;
+    line-height: 25px;
+}
+.d_prd_tt_price dl{
+    display: flex;
+    justify-content: space-between;
+}
+.d_prd_tt_price dl dt, dd{
+    display: inline-block;
+    color: #004393;
+}
+.d_prd_tt_price dl dt{
+    font-size: 17px;
+}
+.d_prd_tt_price dl dd{
+    font-size: 24px;
+}
+.d_prd_btn_wrap{
+    width: 100%;
+    margin-top: 56px;
+    text-align: center;
+    display: flex;
+    justify-content: end;
+}
+.d_prd_btn_wrap a{
+	display: flex;
+    width: 100%;
+    justify-content: end;
+}
+.d_prd_btn_wrap p{
+    height: 50px;
+    line-height: 50px;
+    font-size: 17px;
+}
+.d_prd_btn_wrap .d_prd_jjim_btn{
+    width: 50px;
+    color: white;
+    line-height: 50px;
+    position: absolute;
+}
+.d_prd_btn_wrap .d_prd_jjim_btn img{
+    width: 80%;
+    line-height: 50px;
+    top: 5px;
+    right: 398px;
+    position: relative;
+}
+.d_prd_btn_wrap .d_prd_cart_btn{
+    width: 165px;
+    margin-left: 5px;
+    color: #004393;
+    border: 1px solid #004393;
+}
+.d_prd_btn_wrap .d_prd_buy_btn{
+    width: 216px;
+    margin-left: 5px;
+    color: white;
+    border: 1px solid #004393;
+    background-color: #004393;
+}
+
+/* 북마크 탭 */
+.d_prd_contents .d_prd_tap{
+    letter-spacing: -1px;
+    margin: 50px 0px 0px 0px;
+    border-bottom: 1px solid #004393;
+}
+.d_prd_contents .d_prd_tap ul{
+    width: 100%;
+}
+.d_prd_contents .d_prd_tap ul li{
+    width: 16.66%;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
+    border-bottom: 1px #004393 solid;
+    margin: 0px -6px 0px 0px;
+    height: 35px;
+    line-height: 35px;
+}
+.d_prd_contents .d_prd_tap ul li:first-child{
+    border-left: 1px #666666 solid;
+}
+.d_prd_contents .d_prd_tap ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: #666666;
+    font-size: 13px;
+    width: 100%;
+    margin: 0;
+}
+.d_prd_contents .d_prd_tap .prd_tap_sel{
+    background-color: #004393;
+    color: white;
+}
+.d_prd_contents .d_prd_tap .prd_tap_sel a{
+    color: white;
+}
+
+/* 이미지설명 */
+.d_prd_con_img_wrap{
+     width: 1073px;
+     margin: 30px auto;
+     text-align: center;
+}
+
+/* 상품후기 */
+.d_prd_rv_table{
+    width: 100%;
+    letter-spacing: -1px;
+    margin-top: 30px;
+    font-family: 'Noto Sans KR';
+    border-top: 2px solid #004393;
+    border-spacing: 0px;
+}
+
+.d_prd_rv_table tr{
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+.d_prd_rv_table th{
+    background-color: #ebf6fc;
+    margin: 0;
+    padding: 10px;
+}
+.d_prd_rv_table td{
+    border-bottom: 1px solid #999;
+    padding: 10px;
+}
+.d_prd_rv_table td span{
+    display: block;
+    font-size: 11px;
+    color: #999;
+}
+/* 상품 후기 페이징영역 */
+.prd_page ul{
+	display: inline-block;
+}
+.prd_page ul li{
+    list-style: none;
+    display: inline-block;
+    margin-top: 10px;
+    padding:3px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: .5s
+}
+.prd_page ul li:hover{
+    color: white;
+    background-color: #b8d2f1;
+    border-radius: 10%;
+}
+.prd_page ul .prd_active_page{
+    background-color:#004393;
+    border-radius: 10%;
+}
+.prd_page ul .prd_active_page a{
+    color: white;
+    
+}
+.prd_page ul li a{
+    color:#666666
+}

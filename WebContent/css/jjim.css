@@ -1,0 +1,62 @@
+@charset "UTF-8";
+.jjimList{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+ .jul{
+     list-style-type: none;
+     text-align: center; 
+    
+ }
+ .jul>li{
+     mar8gin-top: 20px;
+     margin-right: 20px;
+     text-align: left; 
+     float: left;
+ }
+ .jul>li> a{
+ color: black; /* 글씨 검은색 */
+ text-decoration: none; /* 밑줄 없애기 */
+}
+ .jjim_img{
+     /* border: 1px solid red; */
+     
+ }
+ .jjim_img img{
+     border: 1px solid #666666;
+     width: 150px;
+     height: 150px;
+ }
+ .jjim_info{
+     border: 1px solid #666666;
+     width: 500px;
+     height: 150px;
+     position: relative;
+     padding-top: 35px;
+ }
+ .jjim_info span{
+     margin-left: 5px;
+     text-align: left;
+ }
+ .jjim_info span:nth-child(1){
+     margin-top: 20px;
+ }
+ .jjim_info button{
+     position: absolute;
+     width: 20px;
+     height: 30px;
+     top: 0;
+     bottom: 100;
+     right: 5px;
+     margin: auto 0;
+     border-radius: 3px;
+ }
+ .Null{
+     display: block;
+     margin-top: 50px;
+     text-align: center;
+ }
+ .before_price{
+  text-decoration: line-through;
+ }

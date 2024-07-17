@@ -1,0 +1,115 @@
+@charset "UTF-8";
+body, div, ul, li, a, p, img{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    font-family: 'Noto Sans KR';
+}
+#ev_container{
+    width: 100%;
+}
+.ev_banner, .ev_contents{
+    width: 1076px;
+    margin: 50px auto;
+}
+#path_wrap li{
+    display: inline-block;
+    list-style:none;
+    text-align: center;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+#path_wrap_ul li a{
+    background-color: rgba(0,0,0,0.5);
+    display: block;
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+}
+.ev_contents .ev_tap{
+    margin: 50px 0px 0px 0px;
+}
+.ev_contents .ev_tap ul{
+    width: 100%;
+}
+.ev_contents .ev_tap ul li{
+    width: 16.66%;
+    display: inline-block;
+    text-align: center;
+/*     border-left: 1px #666666 solid; */
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
+    border-bottom: 1px #004393 solid;
+    margin: 0px -6px 0px 0px;
+    height: 35px;
+    line-height: 35px;
+}
+.ev_contents .ev_tap ul li:first-child{
+    border-left: 1px #666666 solid;
+}
+.ev_contents .ev_tap ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: #666666;
+    font-size: 13px;
+    width: 100%;
+    margin: 0;
+}
+.ev_contents .ev_tap .ev_tap_sel{
+    background-color: #004393;
+    color: white;
+}
+.ev_contents .ev_tap .ev_tap_sel a{
+    color: white;
+}
+.ev_prd_list ul{
+    width: 100%;
+    margin-top: 30px;
+	display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.ev_prd_list li{
+    width: calc(90%/4);
+    margin: 20px 13px;
+    display: inline-block;
+    /* padding: 10px */
+}
+.prd_info{
+    width: 100%;
+    text-align: left;
+}
+.ev_prd_list ul li img{
+    width: 100%;
+}
+.ev_prd_list ul li a{
+    text-decoration: none;
+}
+
+.prd_sp{
+    font-size: 0.8em;
+    color: gray;
+}
+.ev_price{
+	display: inline-block;
+    font-size: 0.9em;
+    color: black;
+    font-weight: 500;
+    text-decoration: line-through; 
+}
+.prd_discount_cost{
+    display: inline-block;
+    font-size: 1.1em;
+    color: #004393;
+    font-weight: 600;
+    margin-left: 10px;
+}
+#prd_list_wrap .prd_page{
+    margin-top: 30px;
+    border-top: 1px solid #d9d9d9;
+}

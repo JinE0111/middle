@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="admin">
+
+	<resultMap type = "kr.or.ddit.sfc.vo.AdminVO" id="adminMap">
+		<result column="ad_id" property="adId"/>
+		<result column="ad_pw" property="adPw"/>
+	</resultMap>	 
+	<!--어드민 체크 -->
+	<select id="checkAdmin"  resultType="int">
+	 select count(*) as cnt from admin where ad_id = #{adId}
+	 </select>
+ 	<!-- 어드민 로그인 -->
+ 	<select id="adminLogin" resultMap="adminMap" parameterType="kr.or.ddit.sfc.vo.AdminVO">
+<!--  		select count(*) from admin where ad_id = #{adminId} and ad_pw = #{adminPw}--> 	
+	 select * from admin where ad_id = #{adId} and ad_pw = #{adPw}
+			
+	
+	</select>
+ 	
+ 	<select id="adminDeli" resultType="kr.or.ddit.sfc.vo.AdminDeliVO">
+ 		select A.* from(
+		    select ROWNUM RNUM, B.* from(
+		        SELECT 
+		            m.mem_id, 
+		            b.buy_no, 
+		            MAX(to_char(bd.buy_date, 'YYYY-MM-DD')) buy_date, 
+		            d.deli_stat
+		        FROM 
+		            member m, 
+		            buy b, 
+		            buy_detail bd, 
+		            deli_status d
+		        WHERE 
+		            m.mem_id = b.mem_id
+		            AND b.buy_no = bd.buy_no
+		            AND b.deli_stat_code = d.deli_stat_code
+		        GROUP BY 
+		            m.mem_id, 
+		            b.buy_no, 
+		            d.deli_stat 
+		        ORDER BY 
+		            buy_date DESC
+		    ) B
+			<![CDATA[
+			where ROWNUM <= #{end}
+		)A 
+		where a.RNUM >= #{str}
+		]]>
+ 	</select>
+ 	
+ 	<select id="deliStatus" resultType="kr.or.ddit.sfc.vo.DeliStatusVO">
+ 		select * from deli_status
+ 	</select>
+ 	
+ 	<insert id="adminDoorInsert" parameterType="kr.or.ddit.sfc.vo.DoorVO">
+ 	INSERT INTO ANSWER (A_CODE, A_WRI_DATE, A_CON, AD_ID, DOOR_CODE)
+	VALUES (
+	(SELECT 'A'||LPAD((COALESCE(MAX(TO_NUMBER(SUBSTR(A_CODE, 2))), 0) + 1), 4, '0') FROM ANSWER),
+	  SYSDATE,
+	  #{aCon},
+	  #{adId},
+	  #{doorCode}
+		)
+ 	</insert>
+<!--  	어드민 문의사항 입력시 Y로 변경 -->
+ 	<update id="adminDoorY" parameterType="kr.or.ddit.sfc.vo.DoorVO">
+	 	UPDATE DOOR
+		SET 
+		DOOR_A_YN = 'Y'
+		WHERE
+		DOOR_CODE = #{doorCode}
+ 	</update>
+ 	
+	<!-- 회원리스트 조회 -->
+ 	<resultMap type="kr.or.ddit.sfc.vo.MemberVO" id="memMap">
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pw" property="memPw"/>
+		<result column="mem_name" property="memName"/>
+		<result column="mem_addr" property="memAddr"/>
+		<result column="mem_addr_d" property="memAddrD"/>
+		<result column="mem_post_no" property="memPostNo"/>
+		<result column="mem_email" property="memEmail"/>
+		<result column="mem_tel" property="memTel"/>
+		<result column="mem_birth" property="memBirth"/>
+		<result column="mem_del_yn" property="memDelyn"/>
+	</resultMap>
+	
+	<select id="memberList" resultType="kr.or.ddit.sfc.vo.MemberVO">
+		select A.* from(
+  			select ROWNUM RNUM, B.* from(
+  				select *
+                from member 
+			    order by mem_name
+			) B
+		<![CDATA[
+			where ROWNUM <= #{end}
+		)A 
+		where a.RNUM >= #{str}
+		]]>
+	</select>
+	
+	<select id="memberCnt" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<update id="memberDel">
+		update member 
+		set mem_del_yn = #{memDelYn}
+		where mem_id = #{memId}
+	</update>
+	
+	<select id="memberSearch" resultType="kr.or.ddit.sfc.vo.MemberVO">
+		select rownum rnum, a.*
+		from (select * 
+	        	from member
+	        	where mem_name like '%'||#{searchWord}||'%' 
+	        		or mem_id like '%'||#{searchWord}||'%'
+	        ) a
+	</select>
+	
+	<update id="deliStatUpdate" parameterType="kr.or.ddit.sfc.vo.AdminDeliVO">
+		UPDATE buy
+		SET deli_stat_code = #{deliStatCode}
+		WHERE buy_no = #{buyNo}
+		and mem_id = #{memId}
+	</update>
+	 	
+	<!-- 공지사항 글 추가 -->
+	<insert id="noticeInsert" parameterType="kr.or.ddit.sfc.vo.NoticeVO">
+		insert into notice (notice_no, notice_name, notice_con, notice_date, ad_id)
+		values ( (select count(*)+1 from notice), #{noticeName}, #{noticeCon}, sysdate, #{adId})
+	</insert>
+	
+	<select id="deliCnt" resultType="int">
+		select count(*) from
+		(SELECT 
+		    m.mem_id, 
+		    b.buy_no, 
+		    MAX(to_char(bd.buy_date, 'YYYY-MM-DD')) buy_date, 
+		    d.deli_stat
+		FROM 
+		    member m, 
+		    buy b, 
+		    buy_detail bd, 
+		    deli_status d
+		WHERE 
+		    m.mem_id = b.mem_id
+		    AND b.buy_no = bd.buy_no
+		    AND b.deli_stat_code = d.deli_stat_code
+		GROUP BY 
+		    m.mem_id, 
+		    b.buy_no, 
+		    d.deli_stat 
+		ORDER BY 
+		    buy_date DESC) a
+	</select>
+ </mapper>
+
+ 

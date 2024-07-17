@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="door">
+	
+	
+	<select id="selectAllDoor" resultType="kr.or.ddit.sfc.vo.DoorVO">
+		SELECT 
+		    DOOR_CODE as doorCode, 
+		    DOOR_CON as doorCon,
+		    to_char(DOOR_WRI_DATE, 'YYYY-MM-DD') as doorWriDate, 
+		    DECODE(DOOR_A_YN, 'Y','완료','N','대기중') as doorYn,
+		    DOOR_NAME as doorName,
+		    MEM_ID as memId
+		FROM 
+		    door
+		ORDER BY 
+    		DOOR_WRI_DATE
+	</select>
+	
+	<select id="selectDetailDoor" parameterType="String" resultType="kr.or.ddit.sfc.vo.DoorVO">
+		
+		
+		SELECT d.DOOR_CODE AS doorCode, 
+       d.DOOR_CON AS doorCon, 
+       d.DOOR_WRI_DATE AS doorWriDate, 
+       d.DOOR_A_YN AS doorYn, 
+       d.DOOR_NAME AS doorName, 
+       d.MEM_ID AS memId, 
+       NVL(a.A_CON ,'') AS aCon 
+FROM door d
+LEFT JOIN answer a ON d.DOOR_CODE = a.DOOR_CODE 
+WHERE d.MEM_ID = #{memId} AND d.DOOR_CODE = #{doorCode}
+		
+		<!-- SELECT 
+		    d.DOOR_CODE AS doorCode, 
+		    d.DOOR_CON AS doorCon,
+		    d.DOOR_WRI_DATE AS doorWriDate, 
+		    d.DOOR_A_YN AS doorYn,
+		    d.DOOR_NAME AS doorName,
+		    d.MEM_ID AS memId, 
+		    NVL(a.A_CON ,'') AS aCon
+		FROM 
+		    door d, 
+		    answer a
+		WHERE 
+		    d.DOOR_CODE = a.DOOR_CODE
+		    AND d.MEM_ID = #{memId}
+		    AND d.DOOR_CODE = #{doorCode} -->
+	</select>
+	
+
+	
+ <insert id="insertDoor" parameterType="kr.or.ddit.sfc.vo.DoorVO">
+		 insert into door
+	(
+	DOOR_CODE,
+	DOOR_CON, 
+	DOOR_WRI_DATE, 
+	DOOR_A_YN, 
+	MEM_ID,
+	DOOR_NAME
+	)
+		values
+	(
+	(SELECT 'DO'||LPAD((Max(SUBSTR(DOOR_CODE, 3))+1),3,0)
+	FROM door),
+	#{doorCon}, 
+	sysdate, 
+	'N', 
+	#{memId}, 
+	#{doorName} 
+	)
+	</insert>
+	
+	<!-- 	<update id="" parameterType="kr.or.ddit.sfc.vo.DoorVO"> -->
+<!-- 	</update> -->
+</mapper>
